@@ -1,27 +1,32 @@
 package com.pethumjeewanha.pos.service.util;
 
 import com.pethumjeewanha.pos.dto.CustomerDTO;
+import com.pethumjeewanha.pos.dto.ItemDTO;
 import com.pethumjeewanha.pos.entity.Customer;
+import com.pethumjeewanha.pos.entity.Item;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class EntityDTOMapper {
+@Mapper
+public interface EntityDTOMapper {
 
-    public static CustomerDTO toCustomerDTO(Customer c) {
-        return new CustomerDTO(c.getId(), c.getName(), c.getAddress());
-    }
+    EntityDTOMapper INSTANCE = Mappers.getMapper(EntityDTOMapper.class);
 
-    public static Customer fromCustomerDTO(CustomerDTO c) {
-        return new Customer(c.getId(), c.getName(), c.getAddress());
-    }
+    CustomerDTO toCustomerDTO(Customer c);
 
-    public static List<CustomerDTO> toCustomerDTOList(List<Customer> customers) {
-        return customers.stream().map(EntityDTOMapper::toCustomerDTO).collect(Collectors.toList());
-    }
+    Customer fromCustomerDTO(CustomerDTO c);
 
-    public static List<Customer> fromCustomerDTOList(List<CustomerDTO> customers) {
-        return customers.stream().map(EntityDTOMapper::fromCustomerDTO).collect(Collectors.toList());
-    }
+    List<CustomerDTO> toCustomerDTOList(List<Customer> customers);
 
+    List<Customer> fromCustomerDTOList(List<CustomerDTO> customers);
+
+    ItemDTO toItemDTO(Item i);
+
+    Item fromItemDTO(ItemDTO i);
+
+    List<ItemDTO> toItemDTOList(List<Item> items);
+
+    List<Item> fromItemDTOList(List<ItemDTO> items);
 }

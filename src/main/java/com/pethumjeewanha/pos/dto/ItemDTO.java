@@ -53,7 +53,7 @@ public class ItemDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "ItemTM{" +
+        return "ItemDTO{" +
                 "code='" + code + '\'' +
                 ", description='" + description + '\'' +
                 ", unitPrice=" + unitPrice +

@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static com.pethumjeewanha.pos.service.util.EntityDTOMapper.*;
+import static com.pethumjeewanha.pos.service.util.EntityDTOMapper.INSTANCE;
 
 @Transactional
 @Component
@@ -26,7 +26,7 @@ public class CustomerServiceImpl implements CustomerService {
         if (existCustomer(customer.getId())) {
             throw new DuplicateEntityException(customer.getId() + " already exists");
         }
-        customerDAO.save(fromCustomerDTO(customer));
+        customerDAO.save(INSTANCE.fromCustomerDTO(customer));
     }
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -46,7 +46,7 @@ public class CustomerServiceImpl implements CustomerService {
         if (!existCustomer(customer.getId())) {
             throw new EntityNotFoundException("There is no such customer associated with the id " + customer.getId());
         }
-        customerDAO.update(fromCustomerDTO(customer));
+        customerDAO.update(INSTANCE.fromCustomerDTO(customer));
     }
 
     @Override
@@ -60,19 +60,19 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public CustomerDTO findCustomer(String id) {
-        return toCustomerDTO(customerDAO.findById(id).orElseThrow(() -> new EntityNotFoundException("There is no such customer associated with the id " + id)));
+        return INSTANCE.toCustomerDTO(customerDAO.findById(id).orElseThrow(() -> new EntityNotFoundException("There is no such customer associated with the id " + id)));
     }
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public List<CustomerDTO> findAllCustomers() {
-        return toCustomerDTOList(customerDAO.findAll());
+        return INSTANCE.toCustomerDTOList(customerDAO.findAll());
     }
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public List<CustomerDTO> findAllCustomers(int page, int size) {
-        return toCustomerDTOList(customerDAO.findAll(page, size));
+        return INSTANCE.toCustomerDTOList(customerDAO.findAll(page, size));
     }
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
