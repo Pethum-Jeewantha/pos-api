@@ -98,6 +98,7 @@ public class OrderDTO implements Serializable {
                 ", customerId='" + customerId + '\'' +
                 ", customerName='" + customerName + '\'' +
                 ", orderTotal=" + orderTotal +
+                ", orderDetails=" + orderDetails +
                 '}';
     }
 }
